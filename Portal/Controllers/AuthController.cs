@@ -9,18 +9,13 @@ using System.Web.Security;
 
 namespace Portal.Controllers
 {
+    [AllowAnonymous]
     public class AuthController : Controller
     {
         // GET: Auth
         public ActionResult Login()
         {
-            using (var db = new PortakEntities())
-            {
-                //database erişim
-
-                
-            }
-
+            
             return View();
         }
 
@@ -30,9 +25,40 @@ namespace Portal.Controllers
 
             using (var db = new PortakEntities())
             {
+                var user = db.Users.FirstOrDefault(x => x.Username == login.username && x.Password == login.password);
 
-                
+                if(user != null)
+                {
+                    var x = new
+                    {
+                        ID = user.Id,
+                        Username = user.Username
+                    };
 
+                    var json = JsonConvert.SerializeObject(x);
+                    FormsAuthentication.SetAuthCookie(json, false);
+
+                    if (Request.QueryString.AllKeys.Contains("ReturnUrl"))
+                    {
+                        var gidecekadres = Request.QueryString.GetValues("ReturnUrl")[0];
+                        if (!string.IsNullOrEmpty(gidecekadres))
+                            return Redirect(gidecekadres);
+
+
+                    }
+
+                    return RedirectToAction("Index", "Home");
+
+
+
+                }
+                else
+                {
+                    ViewBag.Message = "Kullanıcı adı ve şifre hatalı";
+                    
+                }
+
+                return View();
             }
             
             //check database
@@ -74,8 +100,8 @@ namespace Portal.Controllers
                     var x = new
                     {
                         ID = register.Id,
-                        Username = register.Username,
-                        Password = register.Password
+                        Username = register.Username
+                        
                     };
 
                     var json = JsonConvert.SerializeObject(x);
@@ -93,9 +119,10 @@ namespace Portal.Controllers
                 return RedirectToAction("Index","Home");
         }
 
+
         public ActionResult Logout()
         {
-            //auth cookie reset
+            FormsAuthentication.SignOut();
             
             return RedirectToAction("Index","Home");
         }

@@ -19,7 +19,7 @@ namespace Portal.Models
         [DisplayName("Password")]
         [Required]
 
-        public int password { get; set; }
+        public string password { get; set; }
 
         [DisplayName("Birthday")]
         [DataType(DataType.Date, ErrorMessage = "Date only")]

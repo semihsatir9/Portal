@@ -11,8 +11,10 @@ using System.Xml.Serialization;
 
 namespace Portal.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Index()
         {
             ViewBag.Title = "Main Page";

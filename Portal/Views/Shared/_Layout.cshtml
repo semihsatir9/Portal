@@ -1,4 +1,21 @@
-﻿<!DOCTYPE html>
+﻿
+
+@{
+
+    var username = "";
+
+    if (User.Identity.IsAuthenticated)
+    {
+        var userdata = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(User.Identity.Name);
+        username = userdata["Username"];
+
+    }
+
+
+}
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -24,17 +41,27 @@
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </li>
+
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> @username <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Home/Index">To Be Implemented</a></li>
+                                
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/Auth/Logout" onclick="return confirm('Are you sure you want to logout?')">Logout</a></li>
+                            </ul>
+                        </li>
+                        }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Auth")</li>
+                    }
+
+
+
+                    
                 </ul>
 
             </div>
@@ -43,7 +70,7 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        
+
     </div>
 
     @Scripts.Render("~/bundles/jquery")
