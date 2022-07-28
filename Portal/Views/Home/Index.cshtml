@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Welcome</h1>
+    <h4>This is the main page for this portal. From the upper screen you can navigate. You might need to log in for the usage of most components.</h4>
+    <hr />
+    <a href="/Auth/Login" class="btn btn-success">Login</a>
+    <a href="/Home/Index" class="btn btn-info">Register</a>
+</div>
+<div class="col-md-3" style="font: italic 12px Helvetica; border:4px groove">
+    <h3>Money Exchange Rates</h3>
+    <div class="col-md-9">
+        <h3 style="background-color:green; color:white">USD:@ViewBag.USD</h3>
+        <h3 style="background-color:blue; color:white">EUR:@ViewBag.EUR</h3>
+    </div>
+    
+
+
+</div>
+
+
