@@ -88,29 +88,32 @@ function drawHand(ctx, pos, length, width) {
 }
     </script>
 
-
 }
 
 <div class="jumbotron">
     <h1>Welcome</h1>
     <h4>This is the main page for this portal. From the upper screen you can navigate. You might need to log in for the usage of most components.</h4>
+    
+    
 </div>
-<div class="col-md-3" style="font: italic 12px Helvetica; border:4px groove">
+<div class="col-md-6" style="font: italic 12px Helvetica; border:4px groove">
     <h3>Money Exchange Rates</h3>
     <div class="col-md-9">
         <h3 style="background-color:green; color:white">USD:@ViewBag.USD</h3>
         <h3 style="background-color:blue; color:white">EUR:@ViewBag.EUR</h3>
     </div>
-    <div class="col-md-3">
-        <canvas id="canvas" width="400" height="400"
-                style="background-color:#333">
-        </canvas>
-    </div>
-
-
-
+   
 </div>
-
+<div class="col-md-6">
+    <canvas id="canvas" width="250" height="250"
+            style="background-color:white">
+    </canvas>
+    <figure>
+        <div class="face top"><p id="s"></p></div>
+        <div class="face front"><p id="m"></p></div>
+        <div class="face left"><p id="h"></p></div>
+    </figure>
+</div>
 
 
 
