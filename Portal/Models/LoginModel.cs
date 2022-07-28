@@ -21,5 +21,10 @@ namespace Portal.Models
 
         public int password { get; set; }
 
+        [DisplayName("Birthday")]
+        [DataType(DataType.Date, ErrorMessage = "Date only")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime Birthday { get; set; }
+
     }
 }

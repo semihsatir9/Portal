@@ -1,13 +1,14 @@
-﻿@model Portal.Models.LoginModel
+﻿
+@model Portal.Models.LoginModel
 
 
 <!DOCTYPE html>
 
-<h4>Login</h4>
+<h1>Login</h1>
 
 @using (Html.BeginForm())
 {
-<div class="row">
+<div class="row" style="">
     <div class="col-md-3">
         <div class="form-group">
             @Html.LabelFor(x => x.username)
@@ -19,8 +20,8 @@
             @Html.TextBoxFor(x => x.password, new { @class = "form-control" })
 
         </div>
-        <button class="btn btn-outline-success btn-block">Login</button>
-        <a href="Auth/Register" class="btn btn-outline-info">Register</a>
+        <button class="btn btn-success btn-block">Login</button>
+        <a href="/Auth/Register" class="btn btn-info btn-block">Register</a>
     </div>
     
 

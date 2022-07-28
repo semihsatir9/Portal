@@ -1,9 +1,11 @@
-﻿using Portal.Models;
+﻿using Newtonsoft.Json;
+using Portal.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Portal.Controllers
 {
@@ -41,16 +43,54 @@ namespace Portal.Controllers
 
         public ActionResult Register()
         { 
-            return View();
+            return View(new User());
         }
 
         [HttpPost]
-        public ActionResult Register(LoginModel register){
+        public ActionResult Register(User register){
 
-            //database model to register
-            //set auth cookie
+            
+            if(string.IsNullOrEmpty(register.Username) || register.Password == null || register.BirthDay == null)
+            {
+                ViewBag.Message = "There are empty fields.";
+                return View(register);
+            }
 
-            return View(register);
+
+            using (var db = new PortakEntities())
+            {
+                var isUsernameTaken = db.Users.Any(x => x.Username == register.Username);
+
+                if (isUsernameTaken)
+                {
+                    ViewBag.Message = "The username is taken.";
+                    return View(register);
+                }
+                else
+                {
+                    db.Users.Add(register);
+                    db.SaveChanges();
+
+                    var x = new
+                    {
+                        ID = register.Id,
+                        Username = register.Username,
+                        Password = register.Password
+                    };
+
+                    var json = JsonConvert.SerializeObject(x);
+
+                    FormsAuthentication.SetAuthCookie(json, false);
+
+
+                }
+            }
+
+
+
+
+
+                return RedirectToAction("Index","Home");
         }
 
         public ActionResult Logout()
