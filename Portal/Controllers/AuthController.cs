@@ -12,12 +12,27 @@ namespace Portal.Controllers
         // GET: Auth
         public ActionResult Login()
         {
+            using (var db = new PortakEntities())
+            {
+                //database erişim
+
+                
+            }
+
             return View();
         }
 
         [HttpPost]
         public ActionResult Login(LoginModel login)
         {
+
+            using (var db = new PortakEntities())
+            {
+
+                
+
+            }
+            
             //check database
             //set auth cookie
 
