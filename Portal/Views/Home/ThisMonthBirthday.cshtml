@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Portal.User>
+
+@{
+    ViewBag.Title = "This Month Birthdays";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ThisMonthBirthday</title>
+</head>
+<body>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDay)
+            </th>
+            <th>
+                How Many Days Remain?
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDay)
+        </td>
+
+        <td>
+            @(item.BirthDay.Day - ViewBag.Day)
+        </td>
+
+    </tr>
+        }
+
+    </table>
+</body>
+</html>

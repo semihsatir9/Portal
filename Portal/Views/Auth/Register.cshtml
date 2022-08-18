@@ -1,6 +1,9 @@
 ﻿@model User
 <h1>Register</h1>
 
+@{
+    ViewBag.Title = "Register";
+}
 
 
 @using (Html.BeginForm())
@@ -17,12 +20,13 @@
                 @Html.LabelFor(x => x.Password)
                 @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
 
+
             </div>
             <div class="form-group">
-                
+
                 @Html.LabelFor(x => x.BirthDay)
                 <br />
-                @Html.EditorFor(x => x.BirthDay, new { htmlAttributes = new { @type = "date", @placeholder = "Date Of Birth" }  })
+                @Html.EditorFor(x => x.BirthDay, new { htmlAttributes = new { @type = "date", @placeholder = "Date Of Birth" } })
                 @Html.ValidationMessageFor(x => x.BirthDay, "", new { @class = "text-danger" })
 
 
@@ -50,7 +54,7 @@
                 });
             });
         </script>
-        }
+    }
 
 
 

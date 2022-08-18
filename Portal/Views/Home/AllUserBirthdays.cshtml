@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Portal.User>
+
+@{
+    ViewBag.Title = "All User Birthdays";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AllUserBirthdays</title>
+</head>
+<body>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDay)
+            </th>
+            
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDay)
+        </td>
+
+        
+
+    </tr>
+        }
+
+    </table>
+</body>
+</html>

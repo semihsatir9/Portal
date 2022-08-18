@@ -12,9 +12,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="BirthDay" Type="smalldatetime" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="Puan" Type="int" Nullable="false" />
+          <Property Name="BirthDay" Type="date" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Portak.dbo.vw_DogumGunuOlanKullanicilar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -58,8 +56,6 @@ warning 6002: The table/view 'Portak.dbo.vw_DogumGunuOlanKullanicilar' does not 
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BirthDay" Type="DateTime" Precision="0" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="Puan" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="vw_DogumGunuOlanKullanicilar">
           <Key>
@@ -94,8 +90,6 @@ warning 6002: The table/view 'Portak.dbo.vw_DogumGunuOlanKullanicilar' does not 
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Puan" ColumnName="Puan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

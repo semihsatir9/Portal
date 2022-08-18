@@ -1,5 +1,6 @@
 ﻿using Portal.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,10 +16,15 @@ namespace Portal.Controllers
     public class HomeController : Controller
     {
         [AllowAnonymous]
-        public ActionResult Index()
+        public dynamic Index()
         {
             ViewBag.Title = "Main Page";
-            HttpClient client = new HttpClient();
+
+            
+
+
+                //this is the exchange rate part
+                HttpClient client = new HttpClient();
             var result = client.GetAsync("https://www.tcmb.gov.tr/kurlar/today.xml");
             var response = result.Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -57,6 +63,13 @@ namespace Portal.Controllers
 
                 }
             }
+            //exchange part ends
+
+           
+            
+
+
+
 
 
 
@@ -64,7 +77,65 @@ namespace Portal.Controllers
             return View();
         }
 
-       
+        [Authorize]
+        public ActionResult AllUserBirthdays()
+        {
+
+            IEnumerable allusers;
+
+            using (var db = new PortakEntities())
+            {
+                allusers = db.Users.ToArray();
+                
+            }
+           
+
+                return View(allusers);
+        }
+
+        public ActionResult ThisMonthBirthday()
+        {
+            DateTime datetime = DateTime.Now;
+            ViewBag.Month = datetime.Month.ToString();
+            ViewBag.Day = datetime.Day;
+            int amountOfBirthdays = 0;
+
+
+
+            using (var db = new PortakEntities())
+            {
+                var y = db.Users.FirstOrDefault(x => x.BirthDay.Month.ToString() == datetime.Month.ToString());
+                List<User> list = new List<User>();
+                
+
+                if (y != null)
+                {
+                    
+                    foreach (var x in db.Users)
+                    {
+                        if(x.BirthDay.Month.ToString() == datetime.Month.ToString())
+                        {
+                            list.Add(x);
+                            
+                        }
+
+                    }
+
+                    return View(list);
+                }
+                else
+                {
+                    
+                    return RedirectToAction("Index");
+                }
+
+
+            }
+
+
+
+            
+        }
 
         
     }

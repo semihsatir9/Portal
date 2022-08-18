@@ -54,7 +54,7 @@ namespace Portal.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "Kullanıcı adı ve şifre hatalı";
+                    ViewBag.Message = "Wrong username or password.";
                     
                 }
 

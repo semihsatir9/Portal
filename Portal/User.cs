@@ -11,7 +11,6 @@ namespace Portal
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class User
@@ -19,12 +18,10 @@ namespace Portal
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime BirthDay { get; set; }
+
         
-        [DisplayName("Birthday")]
-        [DataType(DataType.Date, ErrorMessage = "Date only")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> BirthDay { get; set; }
-        public bool IsActive { get; set; }
-        public int Puan { get; set; }
     }
 }
