@@ -125,6 +125,7 @@
     </Compile>
     <Compile Include="Models\ExchangeRate.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Weather.cs" />
     <Compile Include="PortalDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -198,6 +199,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\pp.png" />
     <Content Include="PortalDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PortalDB.edmx</DependentUpon>

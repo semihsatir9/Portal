@@ -30,20 +30,44 @@
 
         @foreach (var item in Model)
         {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Username)
-        </td>
+            if ((item.BirthDay.Day - ViewBag.Day) >= 0)
+            {
 
-        <td>
-            @Html.DisplayFor(modelItem => item.BirthDay)
-        </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
 
-        <td>
-            @(item.BirthDay.Day - ViewBag.Day)
-        </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BirthDay)
+                    </td>
 
-    </tr>
+                    <td>
+                        @(item.BirthDay.Day - ViewBag.Day)
+                    </td>
+
+                </tr>
+
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BirthDay)
+                    </td>
+
+                    <td>
+                        Already Happened @((item.BirthDay.Day - ViewBag.Day)*-1) Days Ago
+                    </td>
+
+                </tr>
+            }
+
+
         }
 
     </table>

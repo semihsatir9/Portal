@@ -22,11 +22,11 @@ namespace Portal.Controllers
 
             
 
-
+            
                 //this is the exchange rate part
                 HttpClient client = new HttpClient();
-            var result = client.GetAsync("https://www.tcmb.gov.tr/kurlar/today.xml");
-            var response = result.Result;
+                var result = client.GetAsync("https://www.tcmb.gov.tr/kurlar/today.xml");
+                var response = result.Result;
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 var responseData = response.Content.ReadAsStringAsync();
@@ -65,17 +65,53 @@ namespace Portal.Controllers
             }
             //exchange part ends
 
-           
-            
+            //weather part starts
+            HttpClient clientW = new HttpClient();
+            var resultW = clientW.GetAsync("https://www.mgm.gov.tr/FTPDATA/analiz/sonSOA.xml");
+            var responseW = resultW.Result;
+            if (responseW.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var responseDataW = responseW.Content.ReadAsStringAsync();
+                var dataW = responseDataW.Result;
+
+                dataW = dataW.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
 
 
+                XmlSerializer serializer = new XmlSerializer(typeof(Weather_SOA));
+                var weatherxml = new Weather_SOA();
+                using (StringReader sr = new StringReader(dataW))
+                {
+                    weatherxml = (Weather_SOA)serializer.Deserialize(sr);
+                }
 
+                var xmlW = new XmlDocument();
+                xmlW.LoadXml(dataW);
 
+                var SOA = xmlW.GetElementsByTagName("SOA");
+                var cities = SOA[0].ChildNodes;
+                
+                var city = cities[1];
+                    if (city.SelectNodes("ili")[0].InnerText == "İSTANBUL")
+                    {
+                        var v1 = city.SelectNodes("Durum")[0].InnerText.ToString();
+                        v1 = v1.Split(',')[0];
+                        ViewBag.WeatherStatus = v1;
+                        var v2 = city.SelectNodes("Peryot")[0].InnerText.ToString();
+                        ViewBag.WeatherPeriod = v2;
+                        var v3 = city.SelectNodes("Mak")[0].InnerText.ToString();
+                        ViewBag.WeatherTemperature = v3 + "°C";
+                        
+                    }
+                
+            }
 
+            //weather part ends
+                    
+                    return View();
 
-
-            return View();
+            //
         }
+
 
         [Authorize]
         public ActionResult AllUserBirthdays()

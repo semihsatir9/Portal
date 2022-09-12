@@ -92,10 +92,16 @@ function drawHand(ctx, pos, length, width) {
 }
 
 <div class="jumbotron">
+    
     <h1>Welcome</h1>
     <h4>This is the main page for this portal. From the upper screen you can navigate. You might need to log in for the usage of most components.</h4>
     
-    
+
+</div>
+<div class="col-md-6">
+    <canvas id="canvas" width="250" height="250"
+            style="background-color:white">
+    </canvas>
 </div>
 <div class="col-md-6" style="font: italic 12px Helvetica; border:4px groove">
     <h3>Money Exchange Rates</h3>
@@ -105,11 +111,15 @@ function drawHand(ctx, pos, length, width) {
     </div>
    
 </div>
-<div class="col-md-6">
-    <canvas id="canvas" width="250" height="250"
-            style="background-color:white">
-    </canvas>
-</div>
-<div class="col-md-6">
+
+<div class="col-md-6" style="font: italic 12px Helvetica; border:4px groove">
+    <h3>Weather on Istanbul</h3>
+    <div class="col-md-9">
+        <h3> @ViewBag.WeatherStatus </h3>
+        <h3> @ViewBag.WeatherPeriod </h3>
+        <h3> @ViewBag.WeatherTemperature </h3>
+
+    </div>
 
 </div>
+
