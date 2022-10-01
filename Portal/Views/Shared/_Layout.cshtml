@@ -11,6 +11,22 @@
 
     }
 
+    
+    DateTime datetime = DateTime.Now;
+    using (var db = new PortakEntities())
+    {
+
+        var y = db.Users.FirstOrDefault(x => x.BirthDay.Month.ToString() == datetime.Month.ToString());
+        if (y == null)
+        {
+            ViewBag.ShowBirthdays = false;
+        }
+        else
+        {
+            ViewBag.ShowBirthdays = true;
+        }
+    }
+
 
 }
 
@@ -39,9 +55,10 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("All User Birthdays", "AllUserBirthdays", "Home")</li>
 
-
+                    @if (ViewBag.ShowBirthdays)
+                    {
                     <li>@Html.ActionLink("Any Birthdays This Month?", "ThisMonthBirthday", "Home")</li>
-                    
+                    }
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

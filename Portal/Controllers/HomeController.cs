@@ -18,11 +18,10 @@ namespace Portal.Controllers
         [AllowAnonymous]
         public dynamic Index()
         {
-            ViewBag.Title = "Main Page";
-
             
 
-            
+
+
                 //this is the exchange rate part
                 HttpClient client = new HttpClient();
                 var result = client.GetAsync("https://www.tcmb.gov.tr/kurlar/today.xml");
@@ -134,7 +133,7 @@ namespace Portal.Controllers
             DateTime datetime = DateTime.Now;
             ViewBag.Month = datetime.Month.ToString();
             ViewBag.Day = datetime.Day;
-            int amountOfBirthdays = 0;
+            
 
 
 
